@@ -6,6 +6,9 @@ const { Readability } = require("@mozilla/readability");
 const app = express();
 app.use(express.json({ limit: "1mb" }));
 
+app.get("/", (_req, res) => {
+  res.type("text/plain").send("OK - readability-service");
+});
 app.post("/extract", async (req, res) => {
   try {
     const url = (req.body && req.body.url) || "";
@@ -63,3 +66,4 @@ app.post("/extract", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Readability service on " + PORT));
+
